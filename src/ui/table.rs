@@ -77,14 +77,20 @@ pub fn draw(
                     }
                 });
                 row.col(|ui| {
-                    let text = match e.size {
-                        Some(n) => format_size(n, BINARY),
-                        None => "…".to_string(),
-                    };
                     ui.with_layout(
                         egui::Layout::right_to_left(egui::Align::Center),
-                        |ui| {
-                            ui.monospace(text);
+                        |ui| match e.size {
+                            Some(n) => {
+                                ui.monospace(format_size(n, BINARY));
+                            }
+                            None => {
+                                // トップバーの「計算中: N」と同じオレンジ + イタリック
+                                ui.monospace(
+                                    egui::RichText::new("計算中…")
+                                        .color(egui::Color32::from_rgb(200, 160, 60))
+                                        .italics(),
+                                );
+                            }
                         },
                     );
                 });
