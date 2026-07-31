@@ -1,0 +1,145 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>SizeView - Light Theme + Menus</title>
+<style>
+  html,body{margin:0;padding:0;background:#e6e6e6;font-family:"Segoe UI","Yu Gothic UI",sans-serif;color:#1c1c1c;overflow:hidden}
+  .app{width:1000px;height:640px;position:relative;display:flex;flex-direction:column;background:#fafafa;box-shadow:0 0 0 1px #b8b8b8}
+  .titlebar{height:32px;background:#f0f0f0;display:flex;align-items:center;padding:0 12px;color:#333;font-size:12px;justify-content:space-between;border-bottom:1px solid #d0d0d0}
+  .titlebar .win{display:flex}
+  .titlebar .win span{display:inline-block;width:46px;height:32px;text-align:center;line-height:32px;font-size:13px;color:#555}
+  .toolbar{background:#f4f4f4;padding:8px 10px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #d8d8d8;flex-wrap:nowrap}
+  .toolbar .btn{background:#e8e8e8;border:1px solid #c4c4c4;color:#1c1c1c;padding:4px 10px;border-radius:3px;font-size:12px;cursor:default}
+  .toolbar .disabled{opacity:.45}
+  .sep{width:1px;height:20px;background:#c0c0c0;margin:0 4px}
+  .crumb{display:flex;align-items:center;gap:6px;font-size:12px;color:#1c1c1c;flex-wrap:nowrap}
+  .crumb a{color:#0a58c2;text-decoration:none}
+  .crumb .strong{font-weight:600}
+  .right{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12px;position:relative}
+  .check{display:flex;align-items:center;gap:5px}
+  .theme{background:#e0e0e0;border:1px solid #a0a0a0;padding:3px 8px;border-radius:3px;font-size:13px}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead th{background:#eeeeee;text-align:left;padding:6px 10px;color:#333;border-bottom:1px solid #d0d0d0;font-weight:600;user-select:none}
+  thead th.sorted::after{content:"▼";font-size:9px;margin-left:6px;opacity:.85;color:#c07000}
+  tbody td{padding:5px 10px;border-bottom:1px solid #ececec}
+  tbody tr.hover-rc{background:#ebebeb;outline:1px solid #a4a4a4}
+  .icon{width:18px;display:inline-block;text-align:center;margin-right:6px;color:#c9a63b}
+  .name{color:#1c1c1c}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .kind{color:#555}
+  .mtime{color:#555;font-variant-numeric:tabular-nums}
+
+  .status{margin-top:auto;background:#f0f0f0;padding:5px 10px;font-size:11px;color:#444;display:flex;align-items:center;gap:10px;border-top:1px solid #d0d0d0}
+  .status .r{margin-left:auto;display:flex;gap:10px;align-items:center}
+
+  /* menus */
+  .menu{position:absolute;background:#ffffff;border:1px solid #a0a0a0;box-shadow:0 6px 18px rgba(0,0,0,.20);padding:4px 0;font-size:12.5px;z-index:8;border-radius:3px;min-width:170px}
+  .menu .item{padding:6px 14px;color:#1c1c1c}
+  .menu .item.hi{background:#c8e0f4}
+  .menu .item.sel{background:#dbe9f7}
+
+  .ctx{top:280px;left:180px}
+  .theme-menu{top:80px;right:22px;min-width:120px}
+</style></head>
+<body>
+<div class="app">
+  <div class="titlebar">
+    <div>SizeView</div>
+    <div class="win"><span>—</span><span>▢</span><span>×</span></div>
+  </div>
+
+  <div class="toolbar">
+    <span class="btn">← 戻る</span>
+    <span class="btn disabled">進む →</span>
+    <span class="btn">↑ 上へ</span>
+    <span class="btn">🖥 PC</span>
+    <span class="btn">🔄</span>
+    <div class="sep"></div>
+    <div class="crumb">
+      <a>PC</a><span>›</span>
+      <a>D:</a><span>›</span>
+      <a>Projects</a><span>›</span>
+      <span class="strong">myapp</span>
+    </div>
+    <div class="right">
+      <div class="check">☑ ファイルを表示</div>
+      <div class="theme">☀</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th class="sorted" style="width:120px">サイズ</th>
+        <th style="width:150px">更新日時</th>
+        <th style="width:180px">種類</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="icon">📁</span><span class="name">node_modules</span></td>
+        <td class="num">842 MiB</td>
+        <td class="mtime">2026-07-28 14:12</td>
+        <td class="kind">フォルダ</td>
+      </tr>
+      <tr>
+        <td><span class="icon">📁</span><span class="name">target</span></td>
+        <td class="num">1.24 GiB</td>
+        <td class="mtime">2026-07-30 09:44</td>
+        <td class="kind">フォルダ</td>
+      </tr>
+      <tr class="hover-rc">
+        <td><span class="icon">📁</span><span class="name">docs</span></td>
+        <td class="num">128 MiB</td>
+        <td class="mtime">2026-07-25 22:03</td>
+        <td class="kind">フォルダ</td>
+      </tr>
+      <tr>
+        <td><span class="icon">📁</span><span class="name">assets</span></td>
+        <td class="num">54.7 MiB</td>
+        <td class="mtime">2026-07-24 11:20</td>
+        <td class="kind">フォルダ</td>
+      </tr>
+      <tr>
+        <td><span class="icon">📁</span><span class="name">src</span></td>
+        <td class="num">38.4 MiB</td>
+        <td class="mtime">2026-07-31 08:57</td>
+        <td class="kind">フォルダ</td>
+      </tr>
+      <tr>
+        <td><span class="icon">📁</span><span class="name">tests</span></td>
+        <td class="num">6.1 MiB</td>
+        <td class="mtime">2026-07-29 17:31</td>
+        <td class="kind">フォルダ</td>
+      </tr>
+      <tr>
+        <td><span class="icon">📄</span><span class="name">Cargo.lock</span></td>
+        <td class="num">142 KiB</td>
+        <td class="mtime">2026-07-30 09:44</td>
+        <td class="kind">LOCK ファイル</td>
+      </tr>
+      <tr>
+        <td><span class="icon">📄</span><span class="name">Cargo.toml</span></td>
+        <td class="num">1.2 KiB</td>
+        <td class="mtime">2026-07-31 08:14</td>
+        <td class="kind">TOML ファイル</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="status">
+    <span>6 フォルダ / 2 ファイル</span>
+    <div class="r">
+      <span>cache: 49</span>
+      <span>|</span>
+      <span>D:\Projects\myapp</span>
+    </div>
+  </div>
+
+  <div class="menu ctx">
+    <div class="item">エクスプローラーで開く</div>
+    <div class="item">パスをコピー</div>
+    <div class="item">サイズを再計算</div>
+  </div>
+</div>
+</body></html>

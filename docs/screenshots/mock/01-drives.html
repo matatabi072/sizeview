@@ -1,0 +1,106 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>SizeView - Drives</title>
+<style>
+  html,body{margin:0;padding:0;background:#2a2a2a;font-family:"Segoe UI","Yu Gothic UI",sans-serif;color:#dcdcdc;overflow:hidden}
+  .app{width:1000px;height:640px;position:relative;display:flex;flex-direction:column;background:#252525;box-shadow:0 0 0 1px #444}
+  .titlebar{height:32px;background:#1f1f1f;display:flex;align-items:center;padding:0 12px;color:#c8c8c8;font-size:12px;justify-content:space-between;border-bottom:1px solid #111}
+  .titlebar .title{opacity:.9}
+  .titlebar .win{display:flex;gap:0}
+  .titlebar .win span{display:inline-block;width:46px;height:32px;text-align:center;line-height:32px;font-size:13px;color:#bbb}
+  .toolbar{background:#2d2d2d;padding:8px 10px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #1c1c1c;flex-wrap:nowrap}
+  .toolbar button,.toolbar .btn{background:#3a3a3a;border:1px solid #555;color:#dcdcdc;padding:4px 10px;border-radius:3px;font-size:12px;cursor:default}
+  .toolbar .disabled{opacity:.45}
+  .sep{width:1px;height:20px;background:#444;margin:0 4px}
+  .crumb{display:flex;align-items:center;gap:6px;font-size:12px;color:#dcdcdc}
+  .crumb .strong{font-weight:600}
+  .right{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12px}
+  .check{display:flex;align-items:center;gap:5px}
+  .theme{background:#3a3a3a;border:1px solid #555;padding:3px 8px;border-radius:3px;font-size:13px}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead th{background:#2d2d2d;text-align:left;padding:6px 10px;color:#c0c0c0;border-bottom:1px solid #1c1c1c;font-weight:600;position:relative}
+  thead th.sorted::after{content:"▲";font-size:9px;margin-left:6px;opacity:.7}
+  thead th.desc::after{content:"▼"}
+  tbody td{padding:5px 10px;border-bottom:1px solid #2b2b2b}
+  tbody tr:hover{background:#2f2f2f}
+  tbody tr.sel{background:#2c4a70}
+  .icon{width:18px;display:inline-block;text-align:center;margin-right:6px}
+  .name{color:#e8e8e8}
+  .suffix{color:#909090;margin-left:8px}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .kind{color:#b8b8b8}
+  .mtime{color:#b8b8b8;font-variant-numeric:tabular-nums}
+
+  .status{margin-top:auto;background:#1f1f1f;padding:5px 10px;font-size:11px;color:#a8a8a8;display:flex;align-items:center;gap:10px;border-top:1px solid #111}
+  .status .r{margin-left:auto;display:flex;gap:10px;align-items:center}
+
+</style></head>
+<body>
+<div class="app">
+  <div class="titlebar">
+    <div class="title">SizeView</div>
+    <div class="win"><span>—</span><span>▢</span><span>×</span></div>
+  </div>
+
+  <div class="toolbar">
+    <span class="btn disabled">← 戻る</span>
+    <span class="btn disabled">進む →</span>
+    <span class="btn disabled">↑ 上へ</span>
+    <span class="btn">🖥 PC</span>
+    <span class="btn">🔄</span>
+    <div class="sep"></div>
+    <div class="crumb"><span class="strong">PC</span></div>
+    <div class="right">
+      <div class="check">☑ ファイルを表示</div>
+      <div class="theme">🌙</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="sorted">名前</th>
+        <th style="width:120px">サイズ</th>
+        <th style="width:150px">更新日時</th>
+        <th style="width:180px">種類</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="icon">💾</span><span class="name">C: (Windows)</span><span class="suffix">空き 128 GiB / 476 GiB</span></td>
+        <td class="num">348 GiB</td>
+        <td class="mtime">—</td>
+        <td class="kind">ローカルディスク</td>
+      </tr>
+      <tr>
+        <td><span class="icon">💾</span><span class="name">D: (Data)</span><span class="suffix">空き 512 GiB / 1.82 TiB</span></td>
+        <td class="num">1.32 TiB</td>
+        <td class="mtime">—</td>
+        <td class="kind">ローカルディスク</td>
+      </tr>
+      <tr>
+        <td><span class="icon">💿</span><span class="name">E:</span></td>
+        <td class="num">—</td>
+        <td class="mtime">—</td>
+        <td class="kind">CD/DVD ドライブ</td>
+      </tr>
+      <tr>
+        <td><span class="icon">💾</span><span class="name">Z: (Backup)</span><span class="suffix">空き 4.2 TiB / 8.00 TiB</span></td>
+        <td class="num">3.8 TiB</td>
+        <td class="mtime">—</td>
+        <td class="kind">ネットワークドライブ</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="status">
+    <span>4 フォルダ / 0 ファイル</span>
+    <div class="r">
+      <span>cache: 0</span>
+      <span>|</span>
+      <span>PC</span>
+    </div>
+  </div>
+
+</div>
+</body></html>
